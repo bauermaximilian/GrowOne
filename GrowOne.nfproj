@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <NanoFrameworkProjectSystemPath>$(MSBuildExtensionsPath)\nanoFramework\v1.0\</NanoFrameworkProjectSystemPath>
+  </PropertyGroup>
+  <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.Default.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{11A8DD76-328B-46DF-9F39-F559912D0360};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>ea491598-a34e-49af-a10c-d0a9b698d206</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>GrowOne</RootNamespace>
+    <AssemblyName>GrowOne</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
+  <ItemGroup>
+    <Compile Include="Common\ByteSerializer.cs" />
+    <Compile Include="Common\Crc32Builder.cs" />
+    <Compile Include="Common\InternalStorage.cs" />
+    <Compile Include="Common\Log.cs" />
+    <Compile Include="Common\MeasurementExtensions.cs" />
+    <Compile Include="Common\MeasurementStatistics.cs" />
+    <Compile Include="Common\MeasurementType.cs" />
+    <Compile Include="Common\Settings\AutomaticWateringSettings.cs" />
+    <Compile Include="Common\Exceptions\InternalException.cs" />
+    <Compile Include="Common\Measurement.cs" />
+    <Compile Include="Common\Settings\HardwareSettings.cs" />
+    <Compile Include="Common\Settings\MoistureWarningSettings.cs" />
+    <Compile Include="Common\Settings\WaterFillLevelWarningSettings.cs" />
+    <Compile Include="Common\Status.cs" />
+    <Compile Include="Common\Settings\TemperatureWarningSettings.cs" />
+    <Compile Include="Common\Unit.cs" />
+    <Compile Include="Common\UnitExtensions.cs" />
+    <Compile Include="Common\Settings\ApplicationSettings.cs" />
+    <Compile Include="Hardware\Actuators\BinaryActuator.cs" />
+    <Compile Include="Hardware\Actuators\IActuator.cs" />
+    <Compile Include="Hardware\Actuators\IActuatorProvider.cs" />
+    <Compile Include="Hardware\Actuators\Relais\RelaisActuator.cs" />
+    <Compile Include="Hardware\Actuators\Relais\RelaisActuatorProvider.cs" />
+    <Compile Include="Hardware\Board\Esp32\Esp32Board.cs" />
+    <Compile Include="Hardware\Board\Esp32\Hcsr04SensorWrapper.cs" />
+    <Compile Include="Hardware\Board\IBoard.cs" />
+    <Compile Include="Hardware\Sensors\AnalogSensor.cs" />
+    <Compile Include="Hardware\Sensors\AnalogSensorProvider.cs" />
+    <Compile Include="Hardware\Sensors\Distance\FillLevelSensor.cs" />
+    <Compile Include="Hardware\Sensors\Distance\FillLevelSensorProvider.cs" />
+    <Compile Include="Hardware\Sensors\Distance\Hcsr04Sensor.cs" />
+    <Compile Include="Hardware\Sensors\Distance\Hcsr04SensorProvider.cs" />
+    <Compile Include="Hardware\Sensors\Distance\IHcsr04SensorWrapper.cs" />
+    <Compile Include="Hardware\Sensors\ISensor.cs" />
+    <Compile Include="Hardware\Sensors\ISensorProvider.cs" />
+    <Compile Include="Hardware\Sensors\SoilMoisture\SoilMoistureSensor.cs" />
+    <Compile Include="Hardware\Sensors\SoilMoisture\SoilMoistureSensorProvider.cs" />
+    <Compile Include="Hardware\Board\Esp32\Esp32Dht22HardwareWrapper.cs" />
+    <Compile Include="Hardware\Sensors\TemperatureHumidity\Dht22Sensor.cs" />
+    <Compile Include="Hardware\Sensors\TemperatureHumidity\Dht22SensorProvider.cs" />
+    <Compile Include="Hardware\Sensors\TemperatureHumidity\IDht22Wrapper.cs" />
+    <Compile Include="Hardware\Signalers\Buzzer\BuzzerSignaler.cs" />
+    <Compile Include="Hardware\Signalers\Buzzer\BuzzerSignalerProvider.cs" />
+    <Compile Include="Common\Tone.cs" />
+    <Compile Include="Common\ToneExtensions.cs" />
+    <Compile Include="Hardware\Signalers\ISignaler.cs" />
+    <Compile Include="Hardware\Signalers\ISignalerProvider.cs" />
+    <Compile Include="Hardware\Signalers\IStatusSignaler.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\WebResourceResolver.cs" />
+    <Compile Include="Resources\WebResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WebResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ApplicationService.cs" />
+    <Compile Include="Services\BackgroundService.cs" />
+    <Compile Include="Services\ConfigurationManager\ConfigurationManagerService.cs" />
+    <Compile Include="Services\DeviceManager\DeviceManagerService.cs" />
+    <Compile Include="Services\IHostedService.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\MeasurementManager\MoistureControlledIrrigator.cs" />
+    <Compile Include="Services\MeasurementManager\WaterFillLevelWarner.cs" />
+    <Compile Include="Services\MeasurementManager\TemperatureRangeWarner.cs" />
+    <Compile Include="Services\MeasurementManager\MoistureRangeWarner.cs" />
+    <Compile Include="Services\MeasurementManager\IMeasurementSupervisor.cs" />
+    <Compile Include="Services\MeasurementManager\MeasurementManagerService.cs" />
+    <Compile Include="Services\MeasurementManager\MeasurementRangeSupervisor.cs" />
+    <Compile Include="Services\SensorManager\SensorManagerService.cs" />
+    <Compile Include="Services\WebServer\ApiRequestHandler.cs" />
+    <Compile Include="Services\WebServer\Contracts\AutomaticWateringSettingsDto.cs" />
+    <Compile Include="Services\WebServer\Contracts\HardwareSettingsDto.cs" />
+    <Compile Include="Services\WebServer\Contracts\RequestHandler.cs" />
+    <Compile Include="Services\WebServer\Contracts\StatusDescriptorDto.cs" />
+    <Compile Include="Services\WebServer\Contracts\MeasurementDto.cs" />
+    <Compile Include="Services\WebServer\Contracts\MoistureWarningSettingsDto.cs" />
+    <Compile Include="Services\WebServer\Contracts\TemperatureWarningSettingsDto.cs" />
+    <Compile Include="Services\WebServer\Contracts\ApplicationSettingsDto.cs" />
+    <Compile Include="Services\WebServer\Contracts\WaterFillLevelWarningSettingsDto.cs" />
+    <Compile Include="Services\WebServer\FileRequestHandler.cs" />
+    <Compile Include="Services\WebServer\HttpServer.cs" />
+    <Compile Include="Services\WebServer\IRequestHandler.cs" />
+    <Compile Include="Services\WebServer\WebServerService.cs" />
+    <Compile Include="Services\WebServer\WebServerUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Iot.Device.Dhtxx.Esp32">
+      <HintPath>packages\nanoFramework.Iot.Device.Dhtxx.Esp32.1.2.13\lib\Iot.Device.Dhtxx.Esp32.dll</HintPath>
+    </Reference>
+    <Reference Include="Iot.Device.Hcsr04.Esp32">
+      <HintPath>packages\nanoFramework.Iot.Device.Hcsr04.Esp32.1.2.13\lib\Iot.Device.Hcsr04.Esp32.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>packages\nanoFramework.CoreLibrary.1.12.0\lib\mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.Hardware.Esp32">
+      <HintPath>packages\nanoFramework.Hardware.Esp32.1.3.6.7\lib\nanoFramework.Hardware.Esp32.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.Hardware.Esp32.Rmt">
+      <HintPath>packages\nanoFramework.Hardware.Esp32.Rmt.1.2.3.5\lib\nanoFramework.Hardware.Esp32.Rmt.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.Json">
+      <HintPath>packages\nanoFramework.Json.2.2.8\lib\nanoFramework.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.ResourceManager">
+      <HintPath>packages\nanoFramework.ResourceManager.1.1.4\lib\nanoFramework.ResourceManager.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.Runtime.Events">
+      <HintPath>packages\nanoFramework.Runtime.Events.1.10.0\lib\nanoFramework.Runtime.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.Runtime.Native">
+      <HintPath>packages\nanoFramework.Runtime.Native.1.5.4\lib\nanoFramework.Runtime.Native.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.System.Collections">
+      <HintPath>packages\nanoFramework.System.Collections.1.4.0\lib\nanoFramework.System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.System.Text">
+      <HintPath>packages\nanoFramework.System.Text.1.2.3\lib\nanoFramework.System.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.WebServer">
+      <HintPath>packages\nanoFramework.WebServer.1.1.17\lib\nanoFramework.WebServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Device.Adc">
+      <HintPath>packages\nanoFramework.System.Device.Adc.1.0.2\lib\System.Device.Adc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Device.Gpio">
+      <HintPath>packages\nanoFramework.System.Device.Gpio.1.0.4\lib\System.Device.Gpio.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Device.I2c">
+      <HintPath>packages\nanoFramework.System.Device.I2c.1.0.3\lib\System.Device.I2c.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Device.Model">
+      <HintPath>packages\nanoFramework.System.Device.Model.1.1.113.2032\lib\System.Device.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Device.Pwm">
+      <HintPath>packages\nanoFramework.System.Device.Pwm.1.0.1\lib\System.Device.Pwm.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Stopwatch">
+      <HintPath>packages\nanoFramework.System.Diagnostics.Stopwatch.1.1.113.2032\lib\System.Diagnostics.Stopwatch.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Streams">
+      <HintPath>packages\nanoFramework.System.IO.Streams.1.1.9\lib\System.IO.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Math">
+      <HintPath>packages\nanoFramework.System.Math.1.4.4\lib\System.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net">
+      <HintPath>packages\nanoFramework.System.Net.1.10.8\lib\System.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>packages\nanoFramework.System.Net.Http.Server.1.5.13\lib\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>packages\nanoFramework.System.Threading.1.0.4\lib\System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="UnitsNet.Frequency">
+      <HintPath>packages\UnitsNet.nanoFramework.Frequency.4.140.0\lib\UnitsNet.Frequency.dll</HintPath>
+    </Reference>
+    <Reference Include="UnitsNet.Length">
+      <HintPath>packages\UnitsNet.nanoFramework.Length.4.140.0\lib\UnitsNet.Length.dll</HintPath>
+    </Reference>
+    <Reference Include="UnitsNet.RelativeHumidity">
+      <HintPath>packages\UnitsNet.nanoFramework.RelativeHumidity.4.140.0\lib\UnitsNet.RelativeHumidity.dll</HintPath>
+    </Reference>
+    <Reference Include="UnitsNet.Temperature">
+      <HintPath>packages\UnitsNet.nanoFramework.Temperature.4.140.0\lib\UnitsNet.Temperature.dll</HintPath>
+    </Reference>
+    <Reference Include="Windows.Storage">
+      <HintPath>packages\nanoFramework.Windows.Storage.1.5.2\lib\Windows.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Windows.Storage.Streams">
+      <HintPath>packages\nanoFramework.Windows.Storage.Streams.1.14.2\lib\Windows.Storage.Streams.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GrowOne.licenseheader" />
+    <None Include="packages.config" />
+    <None Include="README.md" />
+    <None Include="Resources\WebResources\index.html" />
+    <None Include="Resources\WebResources\logo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\WebResources.resx">
+      <Generator>nFResXFileCodeGenerator</Generator>
+      <LastGenOutput>WebResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="COPYING" />
+    <Content Include="LICENSE" />
+  </ItemGroup>
+  <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
+  <ProjectExtensions>
+    <ProjectCapabilities>
+      <ProjectConfigurationsDeclaredAsItems />
+    </ProjectCapabilities>
+  </ProjectExtensions>
+</Project>

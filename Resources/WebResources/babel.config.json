@@ -1,0 +1,8 @@
+{
+   "plugins": [
+      ["babel-plugin-htm", {
+         "tag": "html",
+         "import": "/common/lib/preact.htm.module.js"
+   }]
+ ]
+}
