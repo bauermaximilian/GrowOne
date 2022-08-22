@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineChunkHtmlPlugin = require('inline-chunk-html-plugin');
 const RemovePlugin = require("remove-files-webpack-plugin");
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const path = require('path');
 
 module.exports = {
