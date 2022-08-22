@@ -65,5 +65,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+The _GrowOne_ banner and the _GrowOne_ logo (the files "banner.svg", "logo.svg" and "logo.ai")
+are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
 GrowOne uses several third-party libraries under different licenses. See the file "LICENSE" for 
 more information.
