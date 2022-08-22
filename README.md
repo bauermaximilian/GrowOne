@@ -31,7 +31,7 @@ written in JavaScript (ES11), HTML5 and CSS (using [Preact](https://preactjs.com
 
 ### User interface demo
 
-https://user-images.githubusercontent.com/21185621/185809189-cc8312fd-bccb-431a-8474-67e92cec69be.mp4
+https://user-images.githubusercontent.com/21185621/186000170-53a2dfa1-3c39-4168-be37-728cdfa24bcd.mp4
 
 ## Setup overview
 
