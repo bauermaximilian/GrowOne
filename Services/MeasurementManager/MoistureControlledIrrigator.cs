@@ -25,6 +25,7 @@ namespace GrowOne.Services.MeasurementManager
         {
             irrigationDurationSeconds = automaticWateringSettings.DurationSeconds;
             this.deviceManager = deviceManager;
+            IsActive = automaticWateringSettings.Enabled;
         }
 
         protected override void PerformRangeExceededAction(Measurement measurement)
