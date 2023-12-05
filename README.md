@@ -35,18 +35,25 @@ https://user-images.githubusercontent.com/21185621/186000170-53a2dfa1-3c39-4168-
 
 ## Setup overview
 
-_GrowOne_ is provided as a Visual Studio 2022 solution, requiring the nanoFramework extension. 
-With this extension being installed, the solution can then be opened and either directly executed 
-and debugged (which gives access to useful debug output), or built and deployed to the board.
-The WiFi network must be configured using the nanoFramework extension (with the WiFi options set 
-to "Auto connect").
+_GrowOne_ can either be deployed directly using the most recent 
+[deployment image](https://github.com/bauermaximilian/GrowOne/releases) and 
+[nanoff](https://github.com/nanoframework/nanoFirmwareFlasher),
+or compiled and deployed manually from source using the Visual Studio 2022 solution, which 
+requires the nanoFramework extension for Visual Studio. With this extension being installed, 
+the solution can then be opened and either directly executed and debugged (which gives access to 
+useful debug output), or built and deployed to the board. 
+
+Please note that, in any case, the WiFi network must be configured on the ESP32. This can be easily 
+done using the nanoFramework extension for Visual Studio - after filling out all the required fields,
+the WiFi options should be set to "Enable".
 
 Depending on the requirements (and the available parts and budget), the setup of the hardware can 
 vary: Not all supported sensors have to be connected, the irrigation can be done using a pump or 
 a magnetic valve and so on.
 
-The wiki contains a more in-depth description on how to get the software running on your 
-microcontroller and how to connect the supported hardware components with each other.
+[The wiki](https://github.com/bauermaximilian/GrowOne/wiki/) contains a more in-depth description 
+on how to get the software running on your microcontroller and how to connect the supported 
+hardware components with each other.
 
 ## License
 
