@@ -122,17 +122,55 @@ export class ApiClient {
     * @returns {Promise<void>} 
     */
    async updateConfiguration(userSettings) {
-      await this.#fetchAuthenticated("/api/configuration/automaticwatering", "PUT",
-         JSON.stringify(userSettings.automaticWateringSettings));
-      await this.#fetchAuthenticated("/api/configuration/hardware", "PUT",
-         JSON.stringify(userSettings.hardwareSettings));
-      await this.#fetchAuthenticated("/api/configuration/moisturewarning", "PUT",
-         JSON.stringify(userSettings.moistureWarningSettings));
-      await this.#fetchAuthenticated("/api/configuration/temperaturewarning", "PUT",
-         JSON.stringify(userSettings.temperatureWarningSettings));
-      await this.#fetchAuthenticated("/api/configuration/waterfilllevelwarning", "PUT",
-         JSON.stringify(userSettings.waterFillLevelWarningSettings));
-      //await this.#fetchAuthenticated("/api/configuration", "PUT", JSON.stringify(userSettings));
+      let currentSegment = "";
+      try {
+         currentSegment = "automaticWateringSettings";
+         await this.#fetchAuthenticated("/api/configuration/automaticwatering", "PUT",
+            JSON.stringify({
+               on: userSettings.automaticWateringSettings.enabled,
+               min: userSettings.automaticWateringSettings.minimumMoisture,
+               dur: userSettings.automaticWateringSettings.durationSeconds,
+               cd: userSettings.automaticWateringSettings.cooldownSeconds
+            }));
+         currentSegment = "moistureWarningSettings";
+         await this.#fetchAuthenticated("/api/configuration/moisturewarning", "PUT",
+            JSON.stringify({
+               on: userSettings.moistureWarningSettings.enabled,
+               min: userSettings.moistureWarningSettings.minimumMoisture,
+               max: userSettings.moistureWarningSettings.maximumMoisture
+            }));
+         currentSegment = "temperatureWarningSettings";
+         await this.#fetchAuthenticated("/api/configuration/temperaturewarning", "PUT",
+            JSON.stringify({
+               on: userSettings.temperatureWarningSettings.enabled,
+               min: userSettings.temperatureWarningSettings.minimumTemperature,
+               max: userSettings.temperatureWarningSettings.maximumTemperature
+            }));
+         currentSegment = "waterFillLevelWarningSettings";
+         await this.#fetchAuthenticated("/api/configuration/waterfilllevelwarning", "PUT",
+            JSON.stringify({
+               on: userSettings.waterFillLevelWarningSettings.enabled,
+               min: userSettings.waterFillLevelWarningSettings.minimumLevel,
+               max: userSettings.waterFillLevelWarningSettings.maximumLevel
+            }));
+         currentSegment = "hardwareSettings";
+         await this.#fetchAuthenticated("/api/configuration/hardware", "PUT",
+            JSON.stringify({
+               msp: userSettings.hardwareSettings.moistureSensorPin,
+               dep: userSettings.hardwareSettings.dht22EchoPin,
+               dtp: userSettings.hardwareSettings.dht22TriggerPin,
+               isp: userSettings.hardwareSettings.irrigatorSwitchPin,
+               ssp: userSettings.hardwareSettings.sensorSwitchPin,
+               bp: userSettings.hardwareSettings.buzzerPin,
+               hep: userSettings.hardwareSettings.hcsr04EchoPin,
+               htp: userSettings.hardwareSettings.hcsr04TriggerPin,
+               hmin: userSettings.hardwareSettings.hcsr04MinimumValueCm,
+               hmax: userSettings.hardwareSettings.hcsr04MaximumValueCm,
+               pass: userSettings.hardwareSettings.password
+            }));
+      } catch (error) {
+         throw new Error(`Saving \"${currentSegment}\" failed (${error}).`);
+      }
    }
 
    /**
@@ -145,38 +183,38 @@ export class ApiClient {
       let responseData = await response.json();
 
       let automaticWateringSettings = new AutomaticWateringSettings(
-         responseData.automaticWateringSettings?.enabled,
-         responseData.automaticWateringSettings?.minimumMoisture,
-         responseData.automaticWateringSettings?.durationSeconds,
-         responseData.automaticWateringSettings?.cooldownSeconds
+         responseData.automaticWateringSettings?.on,
+         responseData.automaticWateringSettings?.min,
+         responseData.automaticWateringSettings?.dur,
+         responseData.automaticWateringSettings?.cd
       );
       let moistureWarningSettings = new MoistureWarningSettings(
-         responseData.moistureWarningSettings?.enabled,
-         responseData.moistureWarningSettings?.minimumMoisture,
-         responseData.moistureWarningSettings?.maximumMoisture
+         responseData.moistureWarningSettings?.on,
+         responseData.moistureWarningSettings?.min,
+         responseData.moistureWarningSettings?.max
       );
       let temperatureWarningSettings = new TemperatureWarningSettings(
-         responseData.temperatureWarningSettings?.enabled,
-         responseData.temperatureWarningSettings?.minimumTemperature,
-         responseData.temperatureWarningSettings?.maximumTemperature
+         responseData.temperatureWarningSettings?.on,
+         responseData.temperatureWarningSettings?.min,
+         responseData.temperatureWarningSettings?.max
       );
       let waterFillLevelWarningSettings = new WaterFillLevelWarningSettings(
-         responseData.waterFillLevelWarningSettings?.enabled,
-         responseData.waterFillLevelWarningSettings?.minimumLevel,
-         responseData.waterFillLevelWarningSettings?.maximumLevel
+         responseData.waterFillLevelWarningSettings?.on,
+         responseData.waterFillLevelWarningSettings?.min,
+         responseData.waterFillLevelWarningSettings?.max
       )
       let hardwareSettings = new HardwareSettings(
-         responseData.hardwareSettings?.moistureSensorPin,
-         responseData.hardwareSettings?.dht22EchoPin,
-         responseData.hardwareSettings?.dht22TriggerPin,
-         responseData.hardwareSettings?.irrigatorSwitchPin,
-         responseData.hardwareSettings?.sensorSwitchPin,
-         responseData.hardwareSettings?.buzzerPin,
-         responseData.hardwareSettings?.hcsr04EchoPin,
-         responseData.hardwareSettings?.hcsr04TriggerPin,
-         responseData.hardwareSettings?.hcsr04MinimumValueCm,
-         responseData.hardwareSettings?.hcsr04MaximumValueCm,
-         responseData.hardwareSettings?.password
+         responseData.hardwareSettings?.msp,
+         responseData.hardwareSettings?.dep,
+         responseData.hardwareSettings?.dtp,
+         responseData.hardwareSettings?.isp,
+         responseData.hardwareSettings?.ssp,
+         responseData.hardwareSettings?.bp,
+         responseData.hardwareSettings?.hep,
+         responseData.hardwareSettings?.htp,
+         responseData.hardwareSettings?.hmin,
+         responseData.hardwareSettings?.hmax,
+         responseData.hardwareSettings?.pass
       );
       
       return new ApplicationSettings(automaticWateringSettings,

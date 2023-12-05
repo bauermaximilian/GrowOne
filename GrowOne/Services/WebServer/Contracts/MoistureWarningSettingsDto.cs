@@ -11,19 +11,19 @@ namespace GrowOne.Services.WebServer.Contracts
 #pragma warning disable IDE1006
     public class MoistureWarningSettingsDto
     {
-        public bool enabled { get; set; }
+        public bool on { get; set; }
 
-        public float minimumMoisture { get; set; }
+        public float min { get; set; }
 
-        public float maximumMoisture { get; set; }
+        public float max { get; set; }
 
         public MoistureWarningSettings ToSettings()
         {
             return new MoistureWarningSettings()
             {
-                Enabled = enabled,
-                MinimumMoisture = minimumMoisture,
-                MaximumMoisture = maximumMoisture
+                Enabled = on,
+                MinimumMoisture = min,
+                MaximumMoisture = max
             };
         }
 
@@ -33,9 +33,9 @@ namespace GrowOne.Services.WebServer.Contracts
             if (settings == null) return null;
             else return new MoistureWarningSettingsDto()
             {
-                enabled = settings.Enabled,
-                minimumMoisture = settings.MinimumMoisture,
-                maximumMoisture = settings.MaximumMoisture
+                on = settings.Enabled,
+                min = settings.MinimumMoisture,
+                max = settings.MaximumMoisture
             };
         }
     }

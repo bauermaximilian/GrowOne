@@ -7,7 +7,6 @@
 using GrowOne.Resources;
 using System;
 using System.Net;
-using System.Text;
 
 namespace GrowOne.Services.WebServer
 {

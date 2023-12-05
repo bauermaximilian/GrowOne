@@ -11,19 +11,19 @@ namespace GrowOne.Services.WebServer.Contracts
 #pragma warning disable IDE1006
     public class WaterFillLevelWarningSettingsDto
     {
-        public bool enabled { get; set; }
+        public bool on { get; set; }
 
-        public float minimumLevel { get; set; }
+        public float min { get; set; }
 
-        public float maximumLevel { get; set; }
+        public float max { get; set; }
 
         public WaterFillLevelWarningSettings ToSettings()
         {
             return new WaterFillLevelWarningSettings()
             {
-                Enabled = enabled,
-                MinimumLevel = minimumLevel,
-                MaximumLevel = maximumLevel
+                Enabled = on,
+                MinimumLevel = min,
+                MaximumLevel = max
             };
         }
 
@@ -33,9 +33,9 @@ namespace GrowOne.Services.WebServer.Contracts
             if (settings == null) return null;
             else return new WaterFillLevelWarningSettingsDto()
             {
-                enabled = settings.Enabled,
-                minimumLevel = settings.MinimumLevel,
-                maximumLevel = settings.MaximumLevel
+                on = settings.Enabled,
+                min = settings.MinimumLevel,
+                max = settings.MaximumLevel
             };
         }
     }

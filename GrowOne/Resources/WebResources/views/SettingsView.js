@@ -103,31 +103,40 @@ export class SettingsView extends Component {
       if (this.#settingsLoading || this.state.isBusy) return;
       await this.setStateAsync({isBusy: true});
       
-      try {
-         await this.appContext.apiClient.updateConfiguration(
-            new ApplicationSettings(this.state.automaticWateringSettings,
-               this.state.moistureWarningSettings,
-               this.state.temperatureWarningSettings,
-               this.state.waterFillLevelWarningSettings,
-               this.state.hardwareSettings));
-         await this.setStateAsync({unsavedChanges: false});
-         if ("yes" == await this.appContext.showDialog("Settings saved",
-            "The settings were successfully saved.\n" + 
-            "The device needs to be restarted for the changes to take effect.\nDo you want to restart now?", ["yes", "no"])) {
-               this.appContext.setLoadingOverlayVisibility(true);
-               await this.appContext.apiClient.restartDevice();
-               this.appContext.setLoadingOverlayVisibility(false);
-               this.appContext.logout();
+      let savingSuccessful = false;
+      while (true) {
+         try {
+            await this.appContext.apiClient.updateConfiguration(
+               new ApplicationSettings(this.state.automaticWateringSettings,
+                  this.state.moistureWarningSettings,
+                  this.state.temperatureWarningSettings,
+                  this.state.waterFillLevelWarningSettings,
+                  this.state.hardwareSettings));
+            savingSuccessful = true;
+            break;
+         } catch (error) {
+            if (await this.appContext.showDialog("Error",
+               "The settings couldn't be saved.\n" + error,
+               ["cancel", "retry"]) !== "retry") {
+               break;
             }
-      } catch (error) {
-         if (await this.appContext.showDialog("Error",
-            "The settings couldn't be saved.\n" + error,
-            ["cancel", "retry"]) === "retry") {
-            await this.#onSaveSettingsButtonClick();
          }
       }
 
       await this.setStateAsync({isBusy: false});
+
+      if (savingSuccessful) {
+         await this.setStateAsync({unsavedChanges: false});
+         if ("yes" == await this.appContext.showDialog("Settings saved",
+            "The settings were successfully saved.\n The device needs to " + 
+            "be restarted for the changes to take effect.\n Do you want " + 
+            "to restart now?", ["yes", "no"])) {
+            this.appContext.setLoadingOverlayVisibility(true);
+            await this.appContext.apiClient.restartDevice();
+            this.appContext.setLoadingOverlayVisibility(false);
+            this.appContext.logout();
+         }
+      }
    };
 
    render() {

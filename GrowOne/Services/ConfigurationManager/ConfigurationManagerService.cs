@@ -87,7 +87,7 @@ namespace GrowOne.Services.ConfigurationManager
 
         private static void SaveConfiguration(ApplicationSettings userSettings)
         {
-            InternalStorage.Save(userSettings, SettingsFileName, true);
+            InternalStorage.Save(userSettings, SettingsFileName);
         }
 
         private static ApplicationSettings LoadConfiguration()

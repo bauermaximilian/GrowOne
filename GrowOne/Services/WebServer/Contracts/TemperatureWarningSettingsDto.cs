@@ -11,19 +11,19 @@ namespace GrowOne.Services.WebServer.Contracts
 #pragma warning disable IDE1006
     public class TemperatureWarningSettingsDto
     {
-        public bool enabled { get; set; }
+        public bool on { get; set; }
 
-        public float minimumTemperature { get; set; }
+        public float min { get; set; }
 
-        public float maximumTemperature { get; set; }
+        public float max { get; set; }
 
         public TemperatureWarningSettings ToSettings()
         {
             return new TemperatureWarningSettings()
             {
-                Enabled = enabled,
-                MinimumTemperature = minimumTemperature,
-                MaximumTemperature = maximumTemperature
+                Enabled = on,
+                MinimumTemperature = min,
+                MaximumTemperature = max
             };
         }
 
@@ -33,9 +33,9 @@ namespace GrowOne.Services.WebServer.Contracts
             if (settings == null) return null;
             else return new TemperatureWarningSettingsDto()
             {
-                enabled = settings.Enabled,
-                minimumTemperature = settings.MinimumTemperature,
-                maximumTemperature = settings.MaximumTemperature
+                on = settings.Enabled,
+                min = settings.MinimumTemperature,
+                max = settings.MaximumTemperature
             };
         }
     }

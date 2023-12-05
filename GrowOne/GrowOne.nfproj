@@ -80,7 +80,6 @@
     <Compile Include="Services\WebServer\Contracts\ApplicationSettingsDto.cs" />
     <Compile Include="Services\WebServer\Contracts\WaterFillLevelWarningSettingsDto.cs" />
     <Compile Include="Services\WebServer\FileRequestHandler.cs" />
-    <Compile Include="Services\WebServer\HttpServer.cs" />
     <Compile Include="Services\WebServer\IRequestHandler.cs" />
     <Compile Include="Services\WebServer\WebServerService.cs" />
     <Compile Include="Services\WebServer\WebServerUtils.cs" />

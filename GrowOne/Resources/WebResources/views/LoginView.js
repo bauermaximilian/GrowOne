@@ -15,7 +15,7 @@ export class LoginViewProps {
 
 class LoginViewState {
    isBusy = false;
-   lastLoginAttemptFailed = false;
+   lastLoginAttemptFailedReason = null;
    darkMode = true;
 }
 
@@ -63,16 +63,16 @@ export class LoginView extends Component {
             apiClient = await ApiClient.create(this.#referencePasswordInput.value);
          }
          this.appContext.login(apiClient);
-         await this.setStateAsync({isBusy: false, lastLoginAttemptFailed: false });            
+         await this.setStateAsync({isBusy: false, lastLoginAttemptFailedReason: null });            
       } catch (error) {
          this.#referencePasswordInput.value = "";
-         await this.setStateAsync({isBusy: false, lastLoginAttemptFailed: true });
+         await this.setStateAsync({isBusy: false, lastLoginAttemptFailedReason: error.message });
       }
    };
 
    #onPasswordChange = async () => {
-      if (this.state.lastLoginAttemptFailed && !this.state.isBusy) {
-         await this.setStateAsync({ lastLoginAttemptFailed: false });
+      if (this.state.lastLoginAttemptFailedReason !== null && !this.state.isBusy) {
+         await this.setStateAsync({ lastLoginAttemptFailedReason: null });
       }
    }
 
@@ -92,12 +92,17 @@ export class LoginView extends Component {
             </hgroup>
             <hgroup style="text-align:center">
                <h1>GrowOne</h1>
-               <h2>Please authenticate yourself.</h2>
+               <h2>
+               ${this.state.lastLoginAttemptFailedReason !== null ? 
+                  `${this.state.lastLoginAttemptFailedReason} Please try again.` : 
+                  `Please authenticate yourself.`
+               }
+               </h2>
             </hgroup>
             <form>
                <input type="password" 
                       oninput=${this.#onPasswordChange}
-                      aria-invalid=${this.state.lastLoginAttemptFailed ? true : null } 
+                      aria-invalid=${this.state.lastLoginAttemptFailedReason !== null ? true : null} 
                       ref=${r => this.#referencePasswordInput = r}/>
                <button onclick=${this.#onLoginClick} 
                        aria-busy=${this.state.isBusy}>

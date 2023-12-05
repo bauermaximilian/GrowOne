@@ -11,22 +11,22 @@ namespace GrowOne.Services.WebServer.Contracts
 #pragma warning disable IDE1006
     public class AutomaticWateringSettingsDto
     {
-        public bool enabled { get; set; }
+        public bool on { get; set; }
 
-        public float minimumMoisture { get; set; }
+        public float min { get; set; }
 
-        public int durationSeconds { get; set; }
+        public int dur { get; set; }
 
-        public int cooldownSeconds { get; set; }
+        public int cd { get; set; }
 
         public AutomaticWateringSettings ToSettings()
         {
             return new AutomaticWateringSettings()
             {
-                Enabled = enabled,
-                MinimumMoisture = minimumMoisture,
-                DurationSeconds = durationSeconds,
-                CooldownSeconds = cooldownSeconds
+                Enabled = on,
+                MinimumMoisture = min,
+                DurationSeconds = dur,
+                CooldownSeconds = cd
             };
         }
 
@@ -36,10 +36,10 @@ namespace GrowOne.Services.WebServer.Contracts
             if (settings == null) return null;
             else return new AutomaticWateringSettingsDto()
             {
-                enabled = settings.Enabled,
-                minimumMoisture = settings.MinimumMoisture,
-                durationSeconds = settings.DurationSeconds,
-                cooldownSeconds = settings.CooldownSeconds
+                on = settings.Enabled,
+                min = settings.MinimumMoisture,
+                dur = settings.DurationSeconds,
+                cd = settings.CooldownSeconds
             };
         }
     }
