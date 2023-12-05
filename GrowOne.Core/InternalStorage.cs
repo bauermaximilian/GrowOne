@@ -12,15 +12,16 @@ namespace GrowOne.Core
 {
     public class InternalStorage
     {
-        public static void Save(object instance, string fileName, bool overwrite,
-            bool includeChecksum = true)
+        private const string TemporaryWriteFileBufferName = "tempfile.tmp";
+
+        public static void Save(object instance, string fileName, bool includeChecksum = true)
         {
             StorageFile instanceFile;
             byte[] instanceBuffer;
             try
             {
-                instanceFile = GetInternalStorageFolder().CreateFile(fileName, overwrite ?
-                    CreationCollisionOption.ReplaceExisting : CreationCollisionOption.FailIfExists);
+                instanceFile = GetInternalStorageFolder().CreateFile(TemporaryWriteFileBufferName,
+                    CreationCollisionOption.ReplaceExisting);
             }
             catch (Exception exc)
             {
@@ -44,6 +45,19 @@ namespace GrowOne.Core
             {
                 throw new Exception("The serialized object instance couldn't be saved " +
                     "to the file.", exc);
+            }
+
+            try
+            {
+                if (Exists(fileName, out var existingFile))
+                {
+                    existingFile.Delete();
+                    instanceFile.Rename(fileName);
+                }
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("The changes couldn't be applied to the file system.", exc);
             }
         }
 
