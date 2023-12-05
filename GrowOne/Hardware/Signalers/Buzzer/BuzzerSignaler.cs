@@ -18,7 +18,7 @@ namespace GrowOne.Hardware.Signalers.Buzzer
         public BuzzerSignaler(IBoard board, int pin)
         {
             board.SetPwmPin(pin);
-            buzzerChannel = PwmChannel.CreateFromPin(pin);
+            buzzerChannel = PwmChannel.CreateFromPin(pin, (int)Tone.C3, 1);
             buzzerChannel.Stop();
         }
 
