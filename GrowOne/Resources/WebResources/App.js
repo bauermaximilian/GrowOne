@@ -99,14 +99,6 @@ export class App extends Component {
     }
 
    render() {
-      // Passwort verschlüsselt "Keyfile", das - mit GUID der Ressource - SHA256-gehasht wird, 
-      // Ergebnis ist AES-Passwort für Ressource
-      // -> Rückrechnen von "Hash-Passwort" auf Keyfile deutlich schwerer als rückrechnen auf Passwort
-      // -> Selbst wenn Keyfile gehackt wird, ist das Passwort trotzdem nicht geleakt
-      // -> Keyfile auf Server? 
-      // -> Keyfile ohne Dateistruktur: Damit weiß man nicht, ob man erfolgreich entschlüsselt hat :D
-      // -> Backup als QR-Code
-
       let navigationIndex = this.state.currentNavigationIndex;
 
       let loginStyle = {

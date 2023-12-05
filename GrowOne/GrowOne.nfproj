@@ -87,8 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\WebResources\index.html" />
-    <None Include="Resources\WebResources\logo.svg" />
+    <None Include="Resources\WebResources\index.html.gz" />
+    <None Include="Resources\WebResources\logo.svg.gz" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\WebResources.resx">

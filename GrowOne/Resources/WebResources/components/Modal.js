@@ -21,9 +21,6 @@ class ModalState {
    isShown = false;
 }
 
-// DI-Idea: How about a static service container in which classes can register (and unregister) themselves?
-// + Event when service was registered/unregistered, so other services can "wait" for their dependencies 
-// and then initialize themselves?
 export class Modal extends Component {
    state = new ModalState();
 

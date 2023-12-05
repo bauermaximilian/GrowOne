@@ -2,6 +2,7 @@
    "devDependencies": {
       "babel-loader": "^8.2.5",
       "babel-plugin-htm": "^3.0.0",
+      "compression-webpack-plugin": "^10.0.0",
       "css-loader": "^6.7.1",
       "html-webpack-plugin": "^5.5.0",
       "inline-chunk-html-plugin": "^1.1.1",

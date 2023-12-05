@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineChunkHtmlPlugin = require('inline-chunk-html-plugin');
 const RemovePlugin = require("remove-files-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -40,10 +41,11 @@ module.exports = {
       new RemovePlugin({
          after: {
            include: [
-             'index.js'
+             'index.js', 'index.js.gz'
            ]
          }
        },
-	  )
+	  ),
+     new CompressionPlugin()
    ]
 };

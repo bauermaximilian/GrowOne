@@ -7,6 +7,7 @@
 using GrowOne.Resources;
 using System;
 using System.Net;
+using System.Text;
 
 namespace GrowOne.Services.WebServer
 {
@@ -39,6 +40,7 @@ namespace GrowOne.Services.WebServer
                 {
                     context.Response.ContentType = WebServerUtils.GetContentType(url);
                     context.Response.StatusCode = 200;
+                    context.Response.Headers.Set("Content-Encoding", "gzip");
                     WebServerUtils.CopyResourceToStream(resourceName,
                         context.Response.OutputStream);
                     context.Response.Close();
